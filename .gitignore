@@ -1,0 +1,27 @@
+# ---- Keil MDK 编译产物 ----
+MDK-ARM/minirobotarm/
+MDK-ARM/*.uvguix.*
+*.o
+*.d
+*.axf
+*.hex
+*.map
+*.crf
+*.dep
+*.lnp
+*.iex
+*.htm
+*.build_log.htm
+
+# ---- CMake / CLion ----
+build/
+cmake-build-*/
+.idea/
+compile_commands.json
+
+# ---- 其他 ----
+.claude/
+*.bak
+*.log
+Thumbs.db
+.DS_Store
