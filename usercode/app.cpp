@@ -14,11 +14,10 @@ extern "C" void motor2_set_position(float angle_deg);
 static constexpr float L1 = 100.0f;
 static constexpr float L2 = 75.0f;
 
-// 肘部构型: true = 肘朝上 (theta2 > 0), false = 肘朝下 (theta2 < 0)
+// 肘部构型true = 肘朝上false = 肘朝下
 static constexpr bool kElbowUp = true;
 
-// 输入目标位姿 (x, y) [mm], 解算两个关节角并下发.
-// 返回 1 表示可达并已下发目标; 0 表示不可达, 电机目标不变.
+// 输入目标位姿 (x, y)
 extern "C" int arm_set_xy(float x, float y) {
     const float r2 = x * x + y * y;
     const float r_max = L1 + L2;
@@ -36,8 +35,6 @@ extern "C" int arm_set_xy(float x, float y) {
     const float theta1 = std::atan2(y, x) - std::atan2(L2 * sin_t2, L1 + L2 * cos_t2);
 
     const float kRad2Deg = 180.0f / 3.14159265f;
-
-    // theta1 的 atan2 在 ±180° 会跳变(画到 -x 轴那一侧时), 解绕保证目标连续, 否则电机会整圈甩
     float theta1_deg = theta1 * kRad2Deg;
     static float last_theta1_deg = 0.0f;
     static bool  has_last_theta1 = false;

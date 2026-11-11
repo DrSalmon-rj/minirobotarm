@@ -122,8 +122,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    motor2_set_position(target_angle);
-    //arm_draw_square(g_pos_update_period_ms);
+    //motor2_set_position(target_angle);
+    arm_draw_square(g_pos_update_period_ms);
   }
   /* USER CODE END 3 */
 }

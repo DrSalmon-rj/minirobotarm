@@ -5,14 +5,8 @@
 #include "motor.hpp"
 #include "can.h"
 #include "tim.h"
-
-// motor1 / motor2 定义在 motor.cpp 末尾
 extern Motor motor1;
 extern Motor motor2;
-
-// ================= 运行时控制目标 =================
-// 主循环(或调试器)写入, TIM6 ISR 读取
-// extern "C" 让 main.c 能直接链上
 
 extern "C" {
     volatile MotorMode motor1_mode = MotorMode::STOP;
@@ -22,8 +16,6 @@ extern "C" {
     volatile float motor2_target_rpm   = 0.0f;
     volatile float motor2_target_angle = 0.0f;
 }
-
-// 供 C 代码调用的小封装
 extern "C" void motor1_set_speed(float rpm) {
     motor1_target_rpm = rpm;
     motor1_mode = MotorMode::SPEED_CTRL;
